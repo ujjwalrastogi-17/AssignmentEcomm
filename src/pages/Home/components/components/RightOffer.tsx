@@ -1,8 +1,8 @@
-import React from "react";
+// import React from "react";
 
 export default function RightOffer() {
   return (
-    <div className="rightOffer justify-center items-center gap-[40px] border flex flex-col   w-[100%] bg-blue-400 ">
+    <div className="rightOffer justify-center items-center gap-[40px] flex flex-col   w-[100%] bg-blue-400 ">
       <h2 className="text-center w-[80%] mx-auto font-lato text-white text-[32px] font-bold leading-50 tracking-wide uppercase">
         Kimonos, Caftans & Pareos
       </h2>

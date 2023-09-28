@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import MenuItem from './MenuItem'
 
 const menuArray:Array<string> = ["About Us","Blog","Contact Us","Help & support"]

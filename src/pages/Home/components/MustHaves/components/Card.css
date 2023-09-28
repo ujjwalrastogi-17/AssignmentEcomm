@@ -1,0 +1,13 @@
+.bgBig{
+    background-image: url('../../../../../assets/images/MustHaveTab.png');
+    height: 500px;
+    background-repeat: no-repeat;
+    object-fit:fill;
+
+    width: 530px;
+}
+
+
+.smallImg{
+    background-image: url('../../../../../assets//images//MustHave1.png');
+}

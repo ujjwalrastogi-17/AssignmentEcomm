@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0.5rem
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+
+
+.fading-div {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  /* Replace rgba(255, 255, 255, 1) with your desired background color */
+  /* The second rgba value (0) represents full transparency */
+}

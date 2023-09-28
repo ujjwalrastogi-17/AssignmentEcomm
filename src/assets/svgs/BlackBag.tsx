@@ -1,8 +1,7 @@
-import React from "react";
 
 export default function BlackBag() {
   return (
-      <div className=" block sm:hidden">
+      <div className=" block md:hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

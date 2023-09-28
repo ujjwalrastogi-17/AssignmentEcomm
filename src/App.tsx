@@ -1,17 +1,22 @@
 import './App.css';
 import ComponentCategories from './common/ComponentCategories/ComponentCategories';
+// import ComponentCategories from './common/ComponentCategories/ComponentCategories';
+import ComponentFooter from './common/ComponentFooter/ComponentFooter';
 import ComponentLowerNav from './common/ComponentLowerNav/ComponentLowerNav';
 import ComponentNavbar from './common/ComponentNavbar/ComponentNavbar';
-import Home from './pages/Home/Home';
-
+import RouteManager from './routes/RouteManager';
 
 function App() {
   return (
-    <div>
+    <div className='flex flex-col gap-[20px]'>
       <ComponentNavbar/>
       <ComponentLowerNav/>
       <ComponentCategories/>
-      <Home/>
+  
+      <RouteManager/>
+      
+      
+      <ComponentFooter/>
     </div>
   )
 }
