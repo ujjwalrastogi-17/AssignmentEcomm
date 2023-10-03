@@ -1,8 +1,12 @@
-
+import { useAppSelector } from "../../redux/hooks";
 export default function Bag() {
+  const cartArrayLen = useAppSelector(
+    (state) => state.CartArray.CartArray.length
+  );
+
   return (
     <div>
-      <div className="invisible md:visible">
+      <div className="flex justify-center items-center gap-[3px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -24,6 +28,10 @@ export default function Bag() {
             stroke-linejoin="round"
           />
         </svg>
+        <p className="text-white font-lato">Card</p>
+        <div className=" bg-green-500 w-[30px] h-[30px] rounded-[50%] flex justify-center items-center text-white">
+          <p>{cartArrayLen}</p>
+        </div>
       </div>
     </div>
   );

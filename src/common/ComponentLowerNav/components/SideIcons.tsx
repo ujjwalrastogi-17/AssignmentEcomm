@@ -21,13 +21,13 @@ const itemArr: Item[] = [
   },
   {
     icon: <FavIcon />,
-    text: "Favourite",
+    text: "",
     extraItem: true,
     item: <Favorites />,
   },
   {
     icon: <Bag />,
-    text: "Bag",
+    text: "",
     extraItem: true,
     item:<CartItems/>
   },
@@ -36,20 +36,20 @@ const itemArr: Item[] = [
 export default function SideIcons() {
   return (
     //  <div>hello</div>
-    <div className="flex relative justify-between w-[25%]">
+    <div className="flex items-center relative justify-between w-[25%]">
       {itemArr.map((item) => {
         return item.extraItem ? (
           <div className="group  relative dropdown  px-4  cursor-pointer font-bold text-base tracking-wide">
-            <div className="flex w-[70px] justify-between">
+            <div className="flex items-center w-[70px] justify-between">
               <p>{item.icon}</p>
-              <p className="text-white font-lato text-base font-normal leading-5">
+              <p className="text-white font-bold">
                 {item.text}
               </p>
             </div>
-            <div className="group-hover:block z-[100] dropdown-menu absolute hidden h-auto">
-              <ul className="top-0">
+            <div className="group-hover:block left-[-150px] rounded-[10px] bg-slate-800 z-[100] dropdown-menu absolute hidden h-auto">
+              {/* <ul className="top-0"> */}
                 {item.item}
-              </ul>
+              {/* </ul> */}
             </div>
           </div>
         ) : (

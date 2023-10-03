@@ -23,3 +23,26 @@ export {default as blueDress} from './blueDress.png';
 export {default as blackDress} from './blackdress.png';
 export {default as pinkDress} from './pinkDress.png';
 export {default as navBarImg} from './navBar.png';
+export {default as Aus} from './australia.png';
+export {default as Paypal}  from './Paypal.png';
+export {default as MasterCard} from './Master card.png';
+export {default as Bitcoin} from './Bitcoin.png';
+export {default as Ausff} from './ausff.png';
+export {default as Race} from './race.png';
+export {default as Transco} from './Transco.png';
+export {default as greenDress1} from './greenDress1.jpeg';
+export {default as greenDress2} from './greenDress2.jpeg';
+// export {default as greenDress3} from './greenDress3.jpeg';
+export {default as blackDress3} from './blackdress3.jpeg';
+export {default as blackDress2} from './blackdress2.jpeg';
+export {default as blackDress4} from './blackdress4.jpeg';
+export {default as blueDress1} from './blueDress1.jpeg';
+export {default as blueDress2} from './blueDress2.jpeg';
+export {default as blueDress3} from './blueDress3.jpeg';
+// export {default as blueDress4} from './blueDress4.jpeg';
+export {default as blueDressMain} from './blueDressMain.png';
+export {default as sweater1} from './sweater1.jpeg';
+export {default as sweater2} from './sweater2.jpeg';
+export {default as google} from './google.png'
+
+// export {default as greenDress1} from './greenDress1.jpeg';

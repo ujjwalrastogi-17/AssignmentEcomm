@@ -1,8 +1,6 @@
-// import React from "react";
-
 export default function Icons() {
   return (
-    <div className="flex md:visible invisible w-[20%] gap-[20px] justify-end items-center">
+    <div className="flex md:flex hidden w-[20%] gap-[20px] justify-end items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"

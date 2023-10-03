@@ -10,6 +10,7 @@ export const NavBarSlice =  createSlice({
     initialState,
     reducers:{
         setShowSideNav:(state,action)=>{
+            console.log('SideNav opened');
             state.showSideNavOpen= action.payload;
         }
     }

@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../../../redux/hooks";
 import { removeItemFromCart } from "../../../../redux/slices/CartSlice";
 import { unmarkInCart } from "../../../../redux/slices/ProductDataSlice";
 import { useAppSelector } from "../../../../redux/hooks";
-import { incItems } from "../../../../redux/slices/CartSlice";
+import { incItems, decItems } from "../../../../redux/slices/CartSlice";
 // import { cartArray } from "../../../../utils/dummyData/dummyData";
 import Trash from "../../../../assets/svgs/Trash";
 
@@ -31,21 +31,28 @@ export default function CartDropdownCard({ Card }: CardProps) {
   );
 
   return (
-    <div className="flex justify-between border-blue-700 border-3 w-[100%] m-auto">
+    <div className="flex justify-between bg-white border-3 w-[100%] mx-auto">
       <div>
         <img className="w-[80px] h-[80px]" src={Card.img} alt="" />
       </div>
-      <div className="flex flex-col justify-center gap-[20px] font-lato text-white text-[20px]">
-        <p className="font-lato text-white text-[20px]">$ {Card.offerPrice}</p>
+      <div className="flex flex-col justify-center gap-[20px] font-lato text-black text-[20px]">
+        <p className="font-lato text-black text-[20px]">$ {Card.offerPrice}</p>
         <p className=" text-green-400">Total : ${quantity * Card.price}</p>
       </div>
 
       <div className="flex flex-col items-end gap-[20px]">
-        <div className="text-white flex w-[70px] items-center gap-[10px] justify-between ">
+        <div className="text-black flex w-[100px] items-center gap-[10px] justify-between ">
           <button
-            className=" h-[20px] w-[20px] border-white"
+            className=" h-[30px] rounded-[50%] w-[40px] m-1 bg-gray-300"
             onClick={() => {
-              console.log("cicked "), dispatch(incItems({ id: Card.id }));
+              console.log("cicked "),
+                dispatch(
+                  incItems({
+                    id: Card.id,
+                    price: Card.price,
+                    discount: Card.anyOffer ? Card.offPercent: 0,
+                  })
+                );
             }}
           >
             +
@@ -53,10 +60,24 @@ export default function CartDropdownCard({ Card }: CardProps) {
           <p className="h-[20px] w-[20px] text-center text-yellow-400">
             {quantity}
           </p>
-          <button className=" h-[20px] w-[20px] border-white">-</button>
+          <button
+            onClick={() => {
+              console.log("cicked "),
+                dispatch(
+                  decItems({
+                    id: Card.id,
+                    price: Card.price,
+                    discount: Card.anyOffer ? Card.offPercent : 0,
+                  })
+                );
+            }}
+            className=" h-[30px] rounded-[50%] w-[40px] m-1 bg-gray-300"
+          >
+            -
+          </button>
         </div>
 
-        <button className="text-white" onClick={handleClick}>
+        <button className="text-black rounded-2 m-2 hover:bg-red-100 active:bg-red-300 p-2" onClick={handleClick}>
           <Trash />
         </button>
       </div>

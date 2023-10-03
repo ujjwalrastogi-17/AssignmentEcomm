@@ -2,7 +2,7 @@
 
 export default function MenuIcon() {
   return (
-    <div className="block md:hidden">
+    <div className="block xl:hidden">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="21"

@@ -1,6 +1,7 @@
 export interface ProductType{
     id:number,
     img:string,
+    imgArray:string[],
     name:string,
     desc:string,
     rating:number,

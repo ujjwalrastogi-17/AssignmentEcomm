@@ -1,53 +1,58 @@
-import React from "react";
-import { incItems } from "../../redux/slices/CartSlice";
-// import { useDispatch } from "react-redux";
+import { incItems, decItems } from "../../redux/slices/CartSlice";
 import { useAppDispatch } from "../../redux/hooks";
-// import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-
 import { ProductType } from "../../utils/type/type";
 
 export interface CardProps {
   Card: ProductType;
   quantity: number;
-  setPrice: React.Dispatch<React.SetStateAction<number>>;
-  setOffer: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Card({
-  Card,
-  quantity,
-  setPrice,
-  setOffer,
-}: CardProps) {
+export default function Card({ Card, quantity }: CardProps) {
   const dispatch = useAppDispatch();
-  //   const cardArr =  useAppSelector((state)=>state.CartArray.CartArray);
-
-  setPrice(Card.price * quantity);
-  setOffer(Card.offerPrice ? Card.offerPrice * quantity : 0);
-
   return (
-    <div className="flex w-[600px] justify-between items-center border gap-[20px] p-4">
+    <div className="flex shadow-md w-[100%] justify-between items-center gap-[20px] p-4">
       <img className="w-[100px] h-[100px] " src={Card.img} alt="" />
       <div className="prices font-lato  flex-col flex gap-[10px] ">
         <p>{Card.name}</p>
         <p>$ {Card.price}</p>
       </div>
 
-      <div className=" flex w-[20%] justify-between">
+      <div className=" flex items-center gap-[3px] w-[10%] justify-center">
         <button
-          className=" h-[20px] w-[20px] border-black"
+          className="hover:bg-gray-50 bg-gray-300 shadow-sm w-[30px] h-[30px] text-center"
           onClick={() => {
-            console.log("cicked "), dispatch(incItems({ id: Card.id }));
+            console.log("cicked "),
+              dispatch(
+                incItems({
+                  id: Card.id,
+                  price: Card.price,
+                  discount: Card.anyOffer ? Card.offPercent : 0,
+                })
+              );
           }}
         >
           +
         </button>
-        <p className="">{quantity}</p>
-        <button className=" h-[20px] w-[20px] border-black">-</button>
+        <p className=" bg-gray-200 shadow-sm w-[30px] h-[30px] text-center flex justify-center items-center">{quantity}</p>
+        <button
+          onClick={() => {
+            console.log("cicked "),
+              dispatch(
+                decItems({
+                  id: Card.id,
+                  price: Card.price,
+                  discount: Card.anyOffer ? Card.offPercent : 0,
+                })
+              );
+          }}
+          className="hover:bg-gray-50 bg-gray-300 shadow-sm w-[30px] h-[30px] text-center"
+        >
+          -
+        </button>
       </div>
 
-      <div className="totalProce">
-        <p>$ {quantity*(Card.offerPrice?Card.offerPrice:Card.price)}</p>
+      <div className="totalPrice">
+        <p>$ {quantity * (Card.offerPrice ? Card.offerPrice : Card.price)}</p>
       </div>
     </div>
   );

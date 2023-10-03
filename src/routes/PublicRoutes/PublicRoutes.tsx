@@ -20,7 +20,7 @@ const PublicRoutes = () => {
       <Route path=":id" element={<ProductWomen />} />
 
       <Route path="fav" element={<ComponentRaw />} />
-      {/* <Route path="checkout" element={<CheckOut />} /> */}
+      <Route path="checkout" element={<CheckOut />} />
       {/* <Route path="*" element={<NoResults />} /> */}
     </Routes>
   );

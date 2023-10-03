@@ -13,19 +13,20 @@ export default function CartItems() {
 
   const newAray = productArray.filter((item) => item.inCart);
   return (
-    <div className="cartItems flex flex-col gap-[30px] p-4 mt-[30px] relative left-[-250px] bg-black w-[400px] m-auto">
+    <div className="cartItems flex flex-col gap-[20px] mt-[10px] relative bg-slate-800 pb-2 px-3 w-[350px]">
       {newAray.length > 0 ? (
         newAray.map((item) => {
           return <CartDropdownCard Card={item} />;
         })
       ) : (
-        <div className="w-[100%] m-auto text-white bg-blue-500 py-2">
+        <div className="w-[100%] m-auto text-white font-lato font-bold text-[20px] py-2">
           Your Cart Is Empty!{" "}
         </div>
       )}
 
-      <div>
-        <button onClick={()=>navigate('checkout')}  className="text-white">View Bag</button>
+      <div className="flex justify-between">
+        <button onClick={()=>navigate('checkout')}  className="text-white hover:border-green-500 hover:bg-slate-600  active:bg-slate-300 hover:text-purple-400 border-2 border-white rounded-[10px] p-2 w-[120px]">View Bag</button>
+        <button onClick={()=>navigate('checkout')}  className="text-white hover:border-green-500 hover:bg-slate-600  active:bg-slate-300 hover:text-purple-400 border-2 border-white rounded-[10px] p-2 w-[120px]">Checkout</button>
       </div>
     </div>
   );

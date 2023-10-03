@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Favorite } from "@mui/icons-material";
 import { Checkbox } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-// import { useAppSelector } from "../../../../redux/hooks";
+import { useAppSelector } from "../../../../redux/hooks";
 import { useAppDispatch } from "../../../../redux/hooks";
 import {
-  // removeItemFromCart,
   addItemInCart,
+  removeItemFromCart,
 } from "../../../../redux/slices/CartSlice";
 import {
   markInCart,
-  // unmarkInCart,
+  unmarkInCart,
 } from "../../../../redux/slices/ProductDataSlice";
 import {
   addItemInFav,
@@ -18,21 +18,21 @@ import {
 } from "../../../../redux/slices/ProductDataSlice";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import { ProductType } from "../../../../utils/type/type";
-// import { incItems, decItems } from "../../../../redux/slices/CartSlice";
-// import  E from "../../../../assets/svgs/bulletSvgs/E";
+import { incItems, decItems } from "../../../../redux/slices/CartSlice";
 
 const sizes: string[] = ["XS", "S", "M", "L", "XL"];
 
 interface Props {
   Card: ProductType;
-  // quan: number;
 }
 
 export default function MainDesc({ Card }: Props) {
   const dispatch = useAppDispatch();
 
+  const [addToCart, setAddToCart] = useState(!Card.inCart);
+
   const [size, setSize] = useState<string[]>([]);
-  const [isChecked, setisChecked] = useState(false);
+  const [isChecked, setisChecked] = useState(Card.inFav);
   const changeSize = (
     e: React.MouseEvent<HTMLElement>,
     updatedInfo: string[]
@@ -40,17 +40,42 @@ export default function MainDesc({ Card }: Props) {
     console.log(e);
     setSize(updatedInfo);
   };
+  const cartArray = useAppSelector((state) => state.CartArray.CartArray);
 
-  const [quantity, setQuantity] = useState(0);
-  // const handleInc = (e: React.MouseEvent<HTMLElement>) => {
-  //   setQuantity(quantity + 1);
-  //   dispatch(incItems({ id: Card.id }));
-  // };
+  const indexinCart = cartArray.findIndex((item) => item.id === Card.id);
 
-  // const handleDec = (e: React.MouseEvent<HTMLElement>) => {
-  //   setQuantity(quantity - 1);
-  //   decItems(decItems({ id: Card.id }));
-  // };
+  const quantity = indexinCart === -1 ? 0 : cartArray[indexinCart].quantity;
+  const [quan, setquan] = useState(quantity);
+  const handleInc = () => {
+    setquan(quan + 1);
+    dispatch(
+      incItems({
+        id: Card.id,
+        price: Card.price,
+        discount: Card.anyOffer ? Card.offPercent : 0,
+      })
+    );
+  };
+
+  const handleDec = () => {
+    setquan(quan - 1);
+    dispatch(
+      decItems({
+        id: Card.id,
+        price: Card.price,
+        discount: Card.anyOffer ? Card.offPercent : 0,
+      })
+    );
+  };
+
+  useEffect(() => {
+    setquan(quantity);
+    // if(quantity===0){
+    //   // setAddToCart(false);
+    //   // setAddToCart(Card.inCart);
+    // }
+    setAddToCart(!Card.inCart);
+  }, [quantity]);
 
   return (
     <div className="w-[100%] md:w-[50%] flex justify-center">
@@ -88,8 +113,20 @@ export default function MainDesc({ Card }: Props) {
                 onChange={() => {
                   setisChecked(!isChecked);
                   !isChecked
-                    ? dispatch(addItemInFav({ id: Card.id }))
-                    : removeItemINFav({ id: Card.id });
+                    ? dispatch(
+                        addItemInFav({
+                          id: Card.id,
+                          price: Card.price,
+                          discount: Card.anyOffer ? Card.offPercent : 0,
+                        })
+                      )
+                    : dispatch(
+                        removeItemINFav({
+                          id: Card.id,
+                          price: Card.price,
+                          discount: Card.anyOffer ? Card.offPercent : 0,
+                        })
+                      );
                 }}
               />
             </div>
@@ -100,9 +137,7 @@ export default function MainDesc({ Card }: Props) {
           <h6 className="text-text-color-light-primary-text font-lato text-base font-bold leading-[33.105px]">
             Size
           </h6>
-          {/* <div className="flex flex-col gap-[20px]"> */}
           <ToggleButtonGroup
-            //   orientation="vertical"
             value={size}
             exclusive
             onChange={changeSize}
@@ -111,7 +146,7 @@ export default function MainDesc({ Card }: Props) {
             {sizes.map((item) => {
               return (
                 <ToggleButton
-                  className=" sm:w-[70px] h-[40px] border-5 border-black"
+                  className=" sm:w-[70px] h-[40px] border-4  shadow-none"
                   value={item}
                 >
                   {item}
@@ -124,8 +159,6 @@ export default function MainDesc({ Card }: Props) {
             Size guideline
           </p>
         </div>
-        {/* </div> */}
-
         <div className="color flex items-center gap-[60px]">
           <h6 className="text-text-color-light-primary-text font-lato text-base font-bold leading-[33.105px]">
             Color
@@ -214,7 +247,7 @@ export default function MainDesc({ Card }: Props) {
           <div className="amt border h-[30px] md:h-[50px] w-[120px] justify-center flex">
             <button
               className="border flex justify-center items-center w-[34%]"
-              onClick={()=>quantity>0?setQuantity(quantity-1):setQuantity(quantity)}
+              onClick={() => handleDec()}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -227,11 +260,11 @@ export default function MainDesc({ Card }: Props) {
               </svg>
             </button>
             <div className="border flex items-center justify-center w-[34%]">
-             {quantity}
+              {quan}
             </div>
             <button
               className="border flex justify-center items-center w-[34%]"
-              onClick={() => setQuantity(quantity + 1)}
+              onClick={handleInc}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -280,54 +313,123 @@ export default function MainDesc({ Card }: Props) {
         </div>
 
         <div className="btns flex w-[100%] justify-start gap-[10px]">
-          <button className="w-[50%] rounded-lg bg-blue-500 h-[50px] text-text-color-inside-inside text-center font-lato text-base font-medium leading-5 tracking-wider uppercase">
+          <button className="w-[50%] active:text-black active:bg-gray-300 hover:text-white hover:bg-blue-600 rounded-lg bg-blue-500 h-[50px] text-text-color-inside-inside text-center font-lato text-base font-medium leading-5 tracking-wider uppercase">
             Shop Now
           </button>
 
-          <button className="flex w-[50%] rounded-lg h-[50px] border justify-center items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="24"
-              viewBox="0 0 25 24"
-              fill="none"
-            >
-              <path
-                d="M9.125 6L9.125 7C9.125 8.65685 10.4681 10 12.125 10C13.7819 10 15.125 8.65685 15.125 7V6"
-                stroke="#434343"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M20.7915 13L19.6819 6.3424C19.3605 4.41365 17.6917 3 15.7363 3H8.51336C6.558 3 4.88924 4.41365 4.56778 6.3424L2.90112 16.3424C2.49476 18.7805 4.37494 21 6.84669 21H13.1249"
-                stroke="#434343"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M19.125 15L19.125 21"
-                stroke="#434343"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M22.125 18L16.125 18"
-                stroke="#434343"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <button
-              onClick={() => {
-                dispatch(addItemInCart({ id: Card.id }));
-                dispatch(markInCart({ id: Card.id }));
-              }}
-              className="w-[50%] flex justify-center items-center rounded-lg text-text-color-inside-inside font-lato text-base font-medium leading-5 tracking-wider uppercase"
-            >
-              Add to basket
+          {addToCart && (
+            <button className="flex w-[50%] hover:bg-gray-200 rounded-lg h-[50px] border justify-center items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="24"
+                viewBox="0 0 25 24"
+                fill="none"
+              >
+                <path
+                  d="M9.125 6L9.125 7C9.125 8.65685 10.4681 10 12.125 10C13.7819 10 15.125 8.65685 15.125 7V6"
+                  stroke="#434343"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M20.7915 13L19.6819 6.3424C19.3605 4.41365 17.6917 3 15.7363 3H8.51336C6.558 3 4.88924 4.41365 4.56778 6.3424L2.90112 16.3424C2.49476 18.7805 4.37494 21 6.84669 21H13.1249"
+                  stroke="#434343"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M19.125 15L19.125 21"
+                  stroke="#434343"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M22.125 18L16.125 18"
+                  stroke="#434343"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <button
+                onClick={() => {
+                  dispatch(
+                    addItemInCart({
+                      id: Card.id,
+                      quantity: quan,
+                      price: Card.price,
+                      discount: Card.anyOffer ? Card.offPercent : 0,
+                    })
+                  );
+                  dispatch(
+                    markInCart({
+                      id: Card.id
+                    })
+                  );
+                  if (quan === 0) {
+                    dispatch(
+                      incItems({
+                        id: Card.id,
+                        price: Card.price,
+                        discount: Card.anyOffer ? Card.offPercent : 0,
+                      })
+                    );
+                  }
+                  setAddToCart(false);
+                }}
+                className="w-[50%] hidden lg:flex justify-center items-center rounded-lg text-text-color-inside-inside font-lato text-base font-medium leading-5 tracking-wider uppercase"
+              >
+                <p className="hidden lg:block text-[15px] sm:text-[10px] lg:text-[15px]">
+                  Add to basket
+                </p>
+              </button>
             </button>
-          </button>
+          )}
+
+          {!addToCart && (
+            <button className="flex w-[50%] gap-[10px] text-white bg-slate-400 hover:bg-gray-500 rounded-lg h-[50px] border justify-center items-center">
+              <p className="">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-trash"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                </svg>
+              </p>
+
+              <button
+                onClick={() => {
+                  dispatch(
+                    removeItemFromCart({
+                      id: Card.id,
+                      price: Card.price,
+                      discount: Card.anyOffer ? Card.offPercent : 0,
+                    })
+                  );
+                  setAddToCart(true);
+                  dispatch(
+                    unmarkInCart({
+                      id: Card.id,
+                      price: Card.price,
+                      discount: Card.anyOffer ? Card.offPercent : 0,
+                    })
+                  );
+                }}
+                className="w-[70%] hidden lg:flex justify-center items-center rounded-lg text-text-color-inside-inside font-lato text-base font-medium leading-5 tracking-wider uppercase"
+              >
+                <p className="hidden w-[100%] lg:block text-[10px] md:text-[10px] sm:text-[10px] xl:text-[15px]">
+                  Remove from basket
+                </p>
+              </button>
+            </button>
+          )}
         </div>
       </div>
     </div>

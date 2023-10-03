@@ -29,6 +29,7 @@ export default function SideNavContent({ visible }: SideNavProps) {
   const [size, setSize] = useState<string[]>([]);
   const [minval, setMinval] = useState(0);
   const [maxVal, setMaxVal] = useState<number>(100);
+
   const handleChange = (
     e: React.MouseEvent<HTMLElement>,
     updatedFormats: string[]
@@ -296,7 +297,7 @@ export default function SideNavContent({ visible }: SideNavProps) {
                 <ToggleButton
                   value={item}
                   className="w-[50px] h-[30px]"
-                  aria-label={item}
+                  // aria-label={item}
                 >
                   {item}
                 </ToggleButton>
@@ -305,7 +306,7 @@ export default function SideNavContent({ visible }: SideNavProps) {
           </ToggleButtonGroup>
         </div>
 
-        <div className="flex flex-col gap-[20px]">
+        <div className="slider flex flex-col gap-[20px]">
           <div className="flex justify-between items-center">
             <input
               value={"$ " + minval}
@@ -338,6 +339,7 @@ export default function SideNavContent({ visible }: SideNavProps) {
               track="inverted"
               step={2}
               onChange={()=>handleMinSlider}
+              // onChange={()=>handleMinSlider}
             />
 
             <Slider
@@ -351,7 +353,7 @@ export default function SideNavContent({ visible }: SideNavProps) {
             />
           </div>
 
-          <div className="flex justify-between">
+          <div className="bottom flex justify-between">
             <p className=" text-gray-400 font-lato text-base font-normal text-[12px] leading-5">
               Minimum $200
             </p>

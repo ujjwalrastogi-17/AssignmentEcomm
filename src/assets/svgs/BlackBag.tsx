@@ -1,4 +1,3 @@
-
 export default function BlackBag() {
   return (
       <div className=" block md:hidden">

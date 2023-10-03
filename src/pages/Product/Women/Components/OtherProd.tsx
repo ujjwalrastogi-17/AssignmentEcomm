@@ -1,6 +1,7 @@
 import OthProdCard from "./OthProdCard";
 
 export default function OtherProd() {
+  console.log("OtherProd");
   return (
     <div className="w-[90%] flex flex-col gap-[20px] m-auto sm:w-[100%]">
       <h3>You might also like</h3>
