@@ -4,7 +4,7 @@ import PaymentForm from './PaymentForm'
 
 export default function ShippingAndPayment() {
   return (
-    <div className="flex md:flex-row flex-col gap-[70px] md:gap-[20px] justify-between w-[100%]">
+    <div className="flex md:flex-row flex-col gap-[70px] md:gap-[20px] mt-[50px] justify-between w-[100%]">
       <div className="w-[100%] md:w-[49%]">
         <div className="flex h-[100px] flex-col gap-[20px]">
           <h2 className="text-primary-text font-lato font-semibold text-2xl leading-5">

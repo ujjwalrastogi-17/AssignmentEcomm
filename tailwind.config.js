@@ -18,6 +18,9 @@ export default {
         footsearch: "var(--background-color-send-email-frm, #7296AB)",
         footer: " var(--background-color-footer, #D1E2EB)",
       },
+      aspectRatio: {
+        "16/9": "4/3",
+      },
     },
   },
   variants: {

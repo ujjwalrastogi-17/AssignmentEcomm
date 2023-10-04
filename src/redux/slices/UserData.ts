@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  //   showSideNavOpen: false,
   isLoggedIn: false,
   email: "",
   password: "",

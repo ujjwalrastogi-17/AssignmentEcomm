@@ -32,13 +32,13 @@ DetailProps) {
         <ul className="flex flex-col gap-[10px]">
           {list?.map((item, index) => (
             <li
-              className="text-text-color-light-secondary-text ml-[20px] list-disc font-lato text-14 font-normal leading-20"
+              className="text-text-color-light-secondary-text ml-[20px] font-lato text-14 font-normal leading-20"
               key={index}
             >
               {typeof item === "string" ? (
-                item
+               <li className=" list-disc">{item}</li>
               ) : (
-                <div className="flex gap-[20px]">
+                <div className="flex w-[100%] gap-[20px]">
                   {item.icon && <item.icon />} {item.content}
                 </div>
               )}

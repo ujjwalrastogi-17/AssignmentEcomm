@@ -5,7 +5,6 @@ const initialState = {
   CartArray: cartArray,
   totalPrice: 0,
   totalDiscount: 0,
-  // quantity: 0,
 };
 
 export const CartSlice = createSlice({
@@ -42,9 +41,7 @@ export const CartSlice = createSlice({
       const { id, price, discount } = action.payload;
       const index = state.CartArray.findIndex((item) => item.id === id);
       state.totalDiscount += parseFloat((discount * 0.01 * price).toFixed(2));
-
       state.totalPrice += price;
-      // if (state.CartArray[index].quantity > 0)
       state.CartArray[index].quantity = state.CartArray[index].quantity + 1;
     },
     decItems: (state, action) => {

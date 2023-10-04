@@ -8,6 +8,7 @@ import { Drawer } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setShowSideNav } from "../../redux/slices/SideNavMenuSlice";
 import SideNav from "./components/SideNav/SideNav";
+// import Arrange from "./components/components/Arrange";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -29,6 +30,8 @@ export default function Home() {
           <SideNav />
         </Drawer>
       </div>
+
+      {/* <Arrange /> */}
 
       <TopBanner />
       <MustHaves />

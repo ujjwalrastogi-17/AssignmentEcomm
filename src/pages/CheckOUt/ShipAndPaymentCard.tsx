@@ -2,7 +2,10 @@ import { PayCardProps } from "../../utils/dummyData/dummyData";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { useAppDispatch } from "../../redux/hooks";
-import { setPaymentMethod } from "../../redux/slices/FormSlice";
+import {
+  setPaymentMethod,
+  setPaymentValid,
+} from "../../redux/slices/FormSlice";
 
 interface Props {
   arr: PayCardProps[];
@@ -25,14 +28,21 @@ export default function ShipAndPaymentCard({ arr }: Props) {
   const { errors } = formState;
 
   const onSubmit = (data: FormValues) => {
-    console.log("onsub", data);
+    // console.log('ON SUBMIT PAY');
+    // console.log("onsub", data);
     dispatch(setPaymentMethod({ id: data.payment }));
+    dispatch(setPaymentValid());
   };
+
 
   const handleRadioChange = (value: string) => {
     // Set the selected value to the form field
     setValue("payment", value);
+    console.log('ONCANGE PAY');
     // Trigger form submission
+
+    dispatch(setPaymentValid());
+
     form.handleSubmit(onSubmit)();
   };
 

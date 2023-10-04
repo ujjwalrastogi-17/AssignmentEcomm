@@ -21,7 +21,6 @@ export default function Card({ Card, quantity }: CardProps) {
         <button
           className="hover:bg-gray-50 bg-gray-300 shadow-sm w-[30px] h-[30px] text-center"
           onClick={() => {
-            console.log("cicked "),
               dispatch(
                 incItems({
                   id: Card.id,
@@ -33,7 +32,9 @@ export default function Card({ Card, quantity }: CardProps) {
         >
           +
         </button>
-        <p className=" bg-gray-200 shadow-sm w-[30px] h-[30px] text-center flex justify-center items-center">{quantity}</p>
+        <p className=" bg-gray-200 shadow-sm w-[30px] h-[30px] text-center flex justify-center items-center">
+          {quantity}
+        </p>
         <button
           onClick={() => {
             console.log("cicked "),

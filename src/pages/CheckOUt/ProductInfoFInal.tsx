@@ -19,7 +19,7 @@ export default function ProductInfoFInal() {
   );
 
   return (
-    <div className="w-[100%] m-auto bg-gray-200 flex flex-col border gap-[20px] p-3">
+    <div className="w-[100%] mx-auto mt-[50px] bg-gray-200 flex flex-col border gap-[20px] p-3">
 
 
       <h3 className="font-lato text-base font-bold leading-5">

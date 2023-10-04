@@ -6,7 +6,7 @@ export default function MoreDesc() {
   const [showMore, setShowMore] = useState(true);
 
   return (
-    <div className={`flex flex-col justify-start fading-div gap-[20px]`}>
+    <div className={`flex w-[100%] flex-col justify-start fading-div gap-[20px]`}>
       <div
         className={`${
           showMore ? "h-[300px] overflow-hidden opacity-60" : ""
@@ -24,12 +24,13 @@ export default function MoreDesc() {
           );
         })}
       </div>
+
       <button
         className="w-[150px] text-left uppercase font-lato"
         onClick={() => setShowMore(!showMore)}
       >
         {showMore ? (
-          <div className="flex gap-[10px] items-center justify-center font-bold">
+          <div className="flex gap-[10px] w-[100%] items-center justify-center font-bold">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -43,7 +44,12 @@ export default function MoreDesc() {
                 d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
               />
             </svg>
-            <p>Show More </p>
+
+            {/* <div className="flex justify-between w-[100%]">
+              <div className="border-2 h-0 w-[49%]"></div> */}
+              <p>Show More </p>
+              {/* <div className="border-2 h-0 w-[49%]"></div>
+            </div> */}
           </div>
         ) : (
           <div className="flex gap-[10px] opacity-50">

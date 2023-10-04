@@ -8,6 +8,9 @@ const initialState = {
   phoneNumber: "",
   paymentMethod: 1,
   shipmentMethod: 1,
+  isCustomeInfoValid:false,
+  isPaymentMethodValid:false,
+  isShipmentMethodValid:false
 };
 
 export const FormSlice = createSlice({
@@ -25,15 +28,25 @@ export const FormSlice = createSlice({
     },
     setPaymentMethod: (state, action) => {
       state.paymentMethod = action.payload.id;
-      console.log("PAY ", state.paymentMethod);
     },
     setShipmentMethod: (state, action) => {
       state.shipmentMethod = action.payload.id;
-      console.log("SHIP ", state.shipmentMethod);
     },
+    setCustomValid:(state)=>{
+      console.log('Cutom');
+      state.isCustomeInfoValid=true;
+    },
+    setPaymentValid:(state)=>{
+      console.log('Payment');
+      state.isPaymentMethodValid=true;
+    },
+    setShipmentValid:(state)=>{
+      console.log('Ship');
+      state.isShipmentMethodValid=true;
+    }
   },
 });
 
-export const { setCustomInfo, setPaymentMethod, setShipmentMethod } =
+export const { setCustomInfo, setPaymentMethod, setShipmentMethod, setCustomValid, setPaymentValid, setShipmentValid } =
   FormSlice.actions;
 export const FormReducer = FormSlice.reducer;

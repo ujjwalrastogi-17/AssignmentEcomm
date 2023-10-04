@@ -15,9 +15,9 @@ export default function ProductWomen() {
   const prodId = parseInt(params.id);
   const Card = prodArray.find((item) => item.id === prodId);
   return (
-    <div className="flex mt-[100px] w-[100%] sm:w-[90%] mx-auto flex-col gap-[50px]">
+    <div className="flex md:mt-[100px] w-[100%] sm:w-[90%] mx-auto flex-col gap-[50px]">
       {Card && (
-        <div className="flex relative flex-col justify-center gap-[20px] sm:gap-0 sm:flex-row">
+        <div className="flex relative flex-col w-[80%] mx-auto justify-center gap-[20px] sm:gap-0 sm:flex-row">
           <Image2 Img={Card.img} Imgs={Card.imgArray} />
           <MainDesc Card={Card} />
         </div>

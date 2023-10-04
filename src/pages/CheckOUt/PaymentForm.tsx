@@ -2,7 +2,10 @@ import { PayCardProps } from "../../utils/dummyData/dummyData";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { useAppDispatch } from "../../redux/hooks";
-import { setPaymentMethod } from "../../redux/slices/FormSlice";
+import {
+  setShipmentMethod,
+  setShipmentValid,
+} from "../../redux/slices/FormSlice";
 
 interface Props {
   arr: PayCardProps[];
@@ -26,16 +29,20 @@ export default function PaymentForm({ arr }: Props) {
 
   const onSubmit = (data: FormValues) => {
     console.log("onsub", data);
-    dispatch(setPaymentMethod({ id: data.shipment }));
+    dispatch(setShipmentMethod({ id: data.shipment }));
+    dispatch(setShipmentValid());
   };
 
   const handleRadioChange = (value: string) => {
+    
     // Set the selected value to the form field
     setValue("shipment", value);
     // Trigger form submission
+    dispatch(setShipmentValid());
     form.handleSubmit(onSubmit)();
   };
 
+  console.log('Shipmemt comp');
   return (
     <div className="w-[100%]">
       <form
@@ -50,10 +57,10 @@ export default function PaymentForm({ arr }: Props) {
                   className="w-[20px] h-[20px]  focus:bg-white"
                   type="radio"
                   id={item.title}
-                  value={item.id_p}
+                  value={item.id_s}
                   {...register("shipment")}
                   onChange={() =>
-                    handleRadioChange(item.id_p ? item.id_p.toString() : "")
+                    handleRadioChange(item.id_s ? item.id_s.toString() : "")
                   }
                 />
                 <p>{errors.shipment?.message}</p>

@@ -5,10 +5,9 @@ import "./Card.css";
 
 export default function Card() {
   return (
-    <div className=" shadow-none sm:w-[100%] lg:h-[550px] lg:w-[570px] rounded-[20px]">
-      <img className="h-[350px] shadow-none sm:h-[450px] block sm:hidden lg:block w-[570px] lg:w-[570px] rounded-t-[20px]" src={ MustHave1} alt="" />
-      <img className="w-[100%] shadow-none hidden sm:block lg:hidden rounded-t-[20px]" src={MustCardTab} alt="" />
-      {/* <div className={`bg-musthvbig h-[400px] w-[400px]`}></div> */}
+    <div className=" shadow-none sm:w-[100%] lg:h-[500px] lg:w-[570px] rounded-[20px]">
+      <img className="h-[300px] aspect-square shadow-none sm:h-[400px] block sm:hidden lg:block w-[570px] lg:w-[570px] rounded-t-[20px]" src={ MustHave1} alt="" />
+      <img className="w-[100%] aspect-square shadow-none hidden sm:block lg:hidden rounded-t-[20px]" src={MustCardTab} alt="" />
       <div className="flex bg-black rounded-b-[20px] justify-between  items-center h-[100px] p-[20px]">
         <div className="flex flex-col gap-[10px]">
           <p className="text-white font-lato text-base font-bold leading-6">
