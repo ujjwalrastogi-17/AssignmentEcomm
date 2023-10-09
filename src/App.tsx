@@ -10,7 +10,7 @@ function App() {
     <div className="flex flex-col gap-[20px]">
       <ComponentNavbar />
       <ComponentLowerNav />
-      Ujjwal
+      Ujjwal Rastogi
       <ComponentCategories />
       <RouteManager />
       <ComponentFooter />
