@@ -10,6 +10,7 @@ function App() {
     <div className="flex flex-col gap-[20px]">
       <ComponentNavbar />
       <ComponentLowerNav />
+      Ujjwal
       <ComponentCategories />
       <RouteManager />
       <ComponentFooter />
